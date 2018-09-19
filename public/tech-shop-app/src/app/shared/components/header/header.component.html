@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/home">
+      <img src="../../../../assets/img/logo.png" class="d-inline-block align-top" [alt]="appTitle" [title]="appTitle">
+      <span>Tech</span>Shop                
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">                    
+      <ul class="navbar-nav ml-auto">                       
+          <li *ngIf="!email" class="nav-item">
+              <a routerLink="/signin" class="nav-link login-link">Sign in</a>
+          </li>
+          <li *ngIf="!email" class="nav-link d-none d-lg-block">
+              <span>or</span>
+          </li>
+          <li *ngIf="!email" class="nav-item">
+              <a routerLink="/signup" class="btn btn-outline-indigo">Sign up</a>
+          </li>
+          <li *ngIf="email" class="nav-item">
+            <a routerLink="/shopping-cart" class="nav-link cart-link">
+              <span *ngIf="cant > 0" class="badge badge-success">{{cant}}</span>
+              <i class="mdi mdi-cart"></i>
+              Cart
+            </a>
+          </li>
+          <li *ngIf="email" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" 
+               role="button" data-toggle="dropdown" aria-haspopup="true" 
+               aria-expanded="false">
+              {{ email }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a routerLink="/my-orders" class="dropdown-item">
+                    My Orders  
+                </a>
+                <a routerLink="/orders" *ngIf="role == 'admin' || role == 'superAdmin'" class="dropdown-item">
+                    Manage Orders  
+                </a>
+                <a *ngIf="role == 'admin' || role == 'superAdmin'" routerLink="/categories" class="dropdown-item">
+                    Manage categories  
+                </a>   
+                <a *ngIf="role == 'admin' || role == 'superAdmin'" routerLink="/products" class="dropdown-item">
+                    Manage products  
+                </a>       
+                <a *ngIf="role == 'admin' || role == 'superAdmin'" routerLink="/users" class="dropdown-item">
+                    Manage users  
+                </a>    
+              <div class="dropdown-divider"></div>
+              <a (click)="logout()" class="dropdown-item">
+                  Logout
+              </a>
+            </div>
+          </li>
+      </ul>                          
+    </div>
+</nav>

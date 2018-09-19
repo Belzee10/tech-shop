@@ -1,0 +1,71 @@
+<section id="signup">  
+  <form class="form-signin"
+        (ngSubmit)="signup()"
+        [formGroup]="signupForm" novalidate>
+    <h2 class="form-signin-heading display-4">Sign up</h2>
+    <div class="form-group">
+      <label for="name" class="sr-only">Name</label>
+      <input type="text" id="name" class="form-control" placeholder="Name" 
+            formControlName="name" 
+            required 
+            [ngClass]="{
+              'is-invalid': name.invalid && (name.dirty || name.touched)              
+            }">
+            <div class="invalid-feedback"
+                *ngIf="name.errors && (name.dirty || name.touched)">
+              The name is required
+            </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName" class="sr-only">Last Name</label>
+      <input type="text" id="lastName" class="form-control" placeholder="Last Name" 
+              formControlName="lastName"
+              required
+              [ngClass]="{
+                'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)                
+              }">
+              <div class="invalid-feedback"
+                  *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
+                  The last name is required
+              </div> 
+    </div>
+    <div class="form-group">
+      <label for="email" class="sr-only">Email address</label>
+      <input type="email" id="email" class="form-control" placeholder="Email address" 
+            formControlName="email"
+            required
+            [ngClass]="{
+              'is-invalid': email.invalid && (email.dirty || email.touched) || errorMessage
+            }">
+            <div class="invalid-feedback"
+                *ngIf="email.errors && (email.dirty || email.touched)">
+                Must be a valid email
+            </div>
+            <div class="server-error"
+                *ngIf="errorMessage">                
+                {{errorMessage}}
+            </div>
+    </div>  
+    <div class="form-group">
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" 
+              formControlName="password"
+              required
+              [ngClass]="{
+                'is-invalid': password.invalid && (password.dirty || password.touched)
+              }">
+              <div class="invalid-feedback"
+                  *ngIf="password.errors && (password.dirty || password.touched)">
+                  Must have more than 3 characters
+              </div>
+    </div>          
+    <button [disabled]="signupForm.invalid" class="btn btn-lg btn-indigo btn-block" type="submit">Sign up</button>
+    <hr>
+      <div class="text-center"> 
+        <p class="lead">
+          Already have an account?
+        </p>
+        <a routerLink="/signin">Sign In</a>
+      </div> 
+  </form>     
+</section>

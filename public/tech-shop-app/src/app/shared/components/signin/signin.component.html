@@ -1,0 +1,45 @@
+<section id="signin">  
+    <form class="form-signin"
+          (ngSubmit)="signin()"
+          [formGroup]="signinForm" novalidate>
+      <h2 class="form-signin-heading display-4">Sign in</h2> 
+      <div class="form-group">
+        <label for="email" class="sr-only">Email address</label>
+        <input type="email" id="email" class="form-control" placeholder="Email address" 
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid': email.invalid && (email.dirty || email.touched)              
+              }">              
+              <div class="invalid-feedback"
+                *ngIf="email.errors && (email.dirty || email.touched)">
+              The email is required
+              </div>             
+      </div>  
+      <div class="form-group">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" 
+                formControlName="password"
+                [ngClass]="{
+                  'is-invalid': password.invalid && (password.dirty || password.touched)              
+                }">  
+                <div class="invalid-feedback"
+                  *ngIf="password.errors && (password.dirty || password.touched)">
+                The password is required
+                </div>              
+      </div>    
+      <div class="form-group">
+        <div class="server-error"
+          *ngIf="errorMessage">                
+          {{errorMessage}}
+        </div>
+      </div>           
+      <button class="btn btn-lg btn-indigo btn-block" type="submit">Sign in</button>
+      <hr>
+      <div class="text-center"> 
+        <p class="lead">
+          Don't have an account yet?
+        </p>
+        <a routerLink="/signup">Sign up now</a>
+      </div>      
+    </form>     
+  </section>

@@ -1,0 +1,28 @@
+.alert-container {
+	position: fixed;
+	top: 2px;
+	left: 0;
+	right: 0;
+	height: 0;
+	text-align: center;
+}
+.alert-container .alert {
+    border: none;
+    border-radius: 2px;
+    padding: 10px 14px; 
+    opacity: .9;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.alert-container > .alert-success {
+	display: inline-block;
+    text-align: left;
+    background-color: #323232;
+    color: #00C853; 
+}
+strong {
+    padding-right: 4px;
+    font-size: 20px;
+}
+strong, span {    
+    vertical-align: middle;
+}

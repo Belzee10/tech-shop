@@ -1,0 +1,116 @@
+<section id="product-new">
+        <app-title [title]="title"></app-title>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-body">
+                <form (ngSubmit)="createProduct()" [formGroup]="productForm" novalidate>
+                  <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" 
+                            class="form-control" 
+                            id="name" 
+                            placeholder="Product Name"
+                            formControlName="name"
+                            required [ngClass]="{
+                              'is-invalid': name.invalid && (name.dirty || name.touched),
+                              'is-valid': name.valid && (name.dirty || name.touched)
+                            }">
+                            <div class="invalid-feedback"
+                                *ngIf="name.errors && (name.dirty || name.touched)">
+                              Field is invalid
+                            </div> 
+                  </div>  
+                  <div class="form-group">
+                        <label for="price">Price</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">$</div>
+                          </div>
+                          <input type="text" 
+                              class="form-control" 
+                              id="price" 
+                              placeholder="Product Price"
+                              formControlName="price"
+                              required [ngClass]="{
+                                'is-invalid': price.invalid && (price.dirty || price.touched),
+                                'is-valid': price.valid && (price.dirty || price.touched)
+                              }">
+                              <div class="invalid-feedback"
+                                  *ngIf="price.errors && (price.dirty || price.touched)">
+                                Field is invalid
+                              </div> 
+                        </div>                               
+                    </div> 
+                    <div class="form-group">
+                      <label for="brand">Brand</label>
+                      <input type="text" 
+                            class="form-control" 
+                            id="brand" 
+                            placeholder="Product Brand"
+                            formControlName="brand"
+                            required [ngClass]="{
+                              'is-invalid': brand.invalid && (brand.dirty || brand.touched),
+                              'is-valid': brand.valid && (brand.dirty || brand.touched)
+                            }">
+                            <div class="invalid-feedback"
+                                *ngIf="brand.errors && (brand.dirty || brand.touched)">
+                              Field is invalid
+                            </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="customFile">Image</label> 
+                        <div class="custom-file"> 
+                          <label class="custom-file-label" for="image">{{fileName}}</label>
+                          <input type="file" 
+                                  class="custom-file-input" 
+                                  id="image"
+                                  required
+                                  (change)="handleFileInput($event.target.files)">                              
+                        </div>                      
+                    </div>                   
+                    <div class="form-group">
+                      <label for="category_id">Category</label>
+                      <select class="form-control" 
+                            id="category_id"                                           
+                            formControlName="category_id"
+                            required [ngClass]="{
+                              'is-invalid': category_id.invalid && (category_id.dirty || category_id.touched),
+                              'is-valid': category_id.valid && (category_id.dirty || category_id.touched)
+                            }">
+                            <option value="" disabled>--Select a Category--</option>
+                            <option *ngFor="let category of categories"
+                                  [value]="category.id">
+                              {{category.name}}
+                            </option>
+                      </select>
+                      <div class="invalid-feedback"
+                          *ngIf="category_id.errors && (category_id.dirty || category_id.touched)">
+                        Field is invalid
+                      </div> 
+                    </div>
+                    <div class="form-group">
+                      <label for="description">Description</label>
+                      <textarea type="text" 
+                            class="form-control" 
+                            id="description" 
+                            placeholder="Product Description"
+                            formControlName="description"
+                            rows="3"                                          
+                            [ngClass]="{
+                              'is-invalid': description.invalid && (description.dirty || description.touched),
+                              'is-valid': description.valid && (description.dirty || description.touched)
+                            }">
+                      </textarea>                                          
+                  </div>
+                  <button [disabled]="productForm.invalid" class="btn btn-indigo">Create</button>
+                  <a routerLink="/products" class="btn btn-light">Go back</a>
+                </form>
+              </div>
+            </div>      
+          </div>
+            <app-alert *ngIf="showAlert"
+                       [messageAlert]="messageAlert">
+            </app-alert>      
+        </div>
+      </section>

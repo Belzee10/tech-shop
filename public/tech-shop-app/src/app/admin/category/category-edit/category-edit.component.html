@@ -1,0 +1,36 @@
+<section id="category-edit">
+  <app-title [title]="title"></app-title>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <form (ngSubmit)="editCategory()" [formGroup]="categoryForm" novalidate>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" 
+                      class="form-control" 
+                      id="name" 
+                      [(ngModel)]="categoryEdit.name"
+                      placeholder="Category Name"
+                      formControlName="name"                                                                                        
+                      required [ngClass]="{
+                        'is-invalid': name.invalid && (name.dirty || name.touched),
+                        'is-valid': name.valid && (name.dirty || name.touched)
+                      }">
+                      <div class="invalid-feedback"
+                          *ngIf="name.errors && (name.dirty || name.touched)">
+                        Field is invalid
+                      </div> 
+            </div> 
+            <button [disabled]="categoryForm.invalid" class="btn btn-indigo">Edit</button>
+            <a routerLink="/categories" class="btn btn-light">Go back</a>
+          </form>          
+        </div>
+      </div>      
+    </div>
+    <app-alert *ngIf="showAlert"
+                [messageAlert]="messageAlert">
+    </app-alert>
+    
+  </div>
+</section>

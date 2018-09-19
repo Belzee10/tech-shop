@@ -1,0 +1,51 @@
+<div *ngIf="product" @fade class="card">
+    <div class="fill-div">
+        <img *ngIf="product.image; else noImage" class="card-img-top" [src]="product.image|urlImage" 
+             [alt]="product.name" [title]="product.name | capitalize" [routerLink]="['/product', product.id]">
+        <ng-template #noImage>
+            <img class="card-img-top" src="../../../assets/img/image.svg" 
+                 alt="No Image" title="No Image" [routerLink]="['/product', product.id]">
+        </ng-template>
+    </div>    
+    <div class="card-body">
+        <h5 class="card-title" [routerLink]="['/product', product.id]">{{product.name | capitalize}} 
+            <span *ngIf="isNew()" class="badge badge-success">New</span>
+        </h5>
+        <span class="company">{{product.brand | capitalize}}</span>
+        <span class="price"><strong>${{product.price}}</strong></span>
+        <div class="footer-card">
+            <div *ngIf="product.cant >= 1; else noAdded" class="row no-gutters add-remove-to-cart">
+                <div class="col-3">
+                    <button [disabled]="loadingRemove" (click)="removeFromCart(product.id)" 
+                            [ngStyle]="{'padding-left':loadingRemove ? '4px' : '12px'}"
+                            class="btn btn-indigo remove">
+                        <i *ngIf="!loadingRemove" class="mdi mdi-minus"></i>
+                        <span *ngIf="loadingRemove" class="spinner"></span>
+                    </button>
+                </div>
+                <div class="col text-center">
+                    <span>{{product.cant}} in cart</span>
+                </div>
+                <div class="col-3">
+                    <button [disabled]="loadingAdd" (click)="addToCart(product.id)" 
+                            [ngStyle]="{'padding-left':loadingAdd ? '4px' : '12px'}"
+                            class="btn btn-indigo add float-right">
+                        <i *ngIf="!loadingAdd" class="mdi mdi-plus"></i>
+                        <span *ngIf="loadingAdd" class="spinner"></span>
+                    </button>
+                </div>                
+            </div>
+            <ng-template #noAdded>
+                <button [disabled]="loadingAdd" 
+                    (click)="addToCart(product.id)"
+                    class="btn btn-block btn-indigo add-to-cart">
+                    <span *ngIf="loadingAdd" class="spinner"></span>
+                    <span *ngIf="!loadingAdd">
+                        <i class="mdi mdi-cart"></i>
+                        Add to cart
+                    </span>                    
+                </button>
+            </ng-template>                                                                  
+        </div>
+    </div>
+</div>

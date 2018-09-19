@@ -1,0 +1,30 @@
+<section id="order-list">
+    <app-title [title]="title"></app-title>  
+    <div class="row">
+      <div class="col">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <th scope="col">Customer</th>
+            <th scope="col">Date</th>
+            <th scope="col"></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td>{{order.user_name | capitalize}}</td>
+              <td>{{order.date}}</td>
+              <td class="text-center">
+                <a [routerLink]="['/order', order.id]" 
+                   title="View">View
+                </a>
+              </td>
+            </tr>
+            <tr *ngIf="orders?.length == 0" class="table-secondary">
+              <th colspan="3" class="text-center">
+                  No Results :(
+              </th>            
+            </tr>
+          </tbody>
+        </table>  
+      </div>
+    </div> 
+</section>

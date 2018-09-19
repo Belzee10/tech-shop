@@ -1,0 +1,44 @@
+<section id="home-page">
+    <div class="row">
+        <div class="col-md-3">
+            <app-side [categories]="categories"
+                      (selectCategoryEvent)="productsBy($event)">
+            </app-side>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-8 offset-md-4">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <app-search (searchTermEvent)="searchTerm($event)">                                
+                            </app-search>        
+                        </div>
+                        <div class="col-md-4 d-none d-md-block">
+                            <div class="btn-group btn-group-toggle">
+                                <label class="btn btn-indigo" [ngClass]="{ 'active': cols === 'col-lg-3' }">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" (click)="fourCol()" checked> 
+                                    <i class="mdi mdi-view-module"></i>
+                                    Four
+                                </label>                                    
+                                <label class="btn btn-indigo" [ngClass]="{ 'active': cols === 'col-lg-4' }">
+                                    <input type="radio" name="options" id="option2" autocomplete="off" (click)="threeCol()"> 
+                                    <i class="mdi mdi-view-grid"></i>
+                                    Three
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div class="row">
+                <div *ngFor="let product of products | filter: term" 
+                     class="col-md-4 grid"
+                     [ngClass]="cols">
+                    <app-product-card                        
+                        [product]="product">
+                    </app-product-card>
+                </div>                
+            </div>            
+        </div>
+    </div>
+</section>

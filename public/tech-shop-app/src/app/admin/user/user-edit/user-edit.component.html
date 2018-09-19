@@ -1,0 +1,89 @@
+<section id="user-edit">
+    <app-title [title]="title"></app-title>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <form (ngSubmit)="editUser()" [formGroup]="userForm" novalidate>
+              <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" 
+                        class="form-control" 
+                        id="name" 
+                        [(ngModel)]="userEdit.name"
+                        placeholder="User Name"
+                        formControlName="name"                                                                                        
+                        required [ngClass]="{
+                          'is-invalid': name.invalid && (name.dirty || name.touched),
+                          'is-valid': name.valid && (name.dirty || name.touched)
+                        }">
+                        <div class="invalid-feedback"
+                            *ngIf="name.errors && (name.dirty || name.touched)">
+                          Field is invalid
+                        </div> 
+              </div> 
+              <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" 
+                        class="form-control" 
+                        id="lastName" 
+                        [(ngModel)]="userEdit.lastName"
+                        placeholder="User Last Name"
+                        formControlName="lastName"
+                        required [ngClass]="{
+                          'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
+                          'is-valid': lastName.valid && (lastName.dirty || lastName.touched)
+                        }">
+                        <div class="invalid-feedback"
+                            *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
+                          Field is invalid
+                        </div> 
+              </div>
+              <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" 
+                        class="form-control" 
+                        id="email" 
+                        [(ngModel)]="userEdit.email"
+                        placeholder="User Email"
+                        formControlName="email"
+                        required [ngClass]="{
+                          'is-invalid': email.invalid && (email.dirty || email.touched),
+                          'is-valid': email.valid && (email.dirty || email.touched)
+                        }">
+                        <div class="invalid-feedback"
+                            *ngIf="email.errors && (email.dirty || email.touched)">
+                          Field is invalid
+                        </div> 
+              </div>
+              <div class="form-group">
+                <label for="role">Role</label>
+                <select class="form-control" 
+                      id="role"   
+                      formControlName="role"
+                      required [ngClass]="{
+                        'is-invalid': role.invalid && (role.dirty || role.touched),
+                        'is-valid': role.valid && (role.dirty || role.touched)
+                      }">
+                      <option *ngFor="let role of roles"
+                            [value]="role">                              
+                        {{role}}
+                      </option>
+                </select>
+                <div class="invalid-feedback"
+                    *ngIf="role.errors && (role.dirty || role.touched)">
+                  Field is invalid
+                </div> 
+              </div>
+              <button [disabled]="userForm.invalid" class="btn btn-indigo">Edit</button>
+              <a routerLink="/users" class="btn btn-light">Go back</a>
+            </form>          
+          </div>
+        </div>      
+      </div>
+      <app-alert *ngIf="showAlert"
+                  [messageAlert]="messageAlert">
+      </app-alert>
+      
+    </div>
+  </section>

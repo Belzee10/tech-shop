@@ -1,0 +1,10 @@
+<app-user-list
+    [users]="users"
+    (destroyUserEvent)="destroyUser($event)">  
+</app-user-list>
+
+<app-pagination *ngIf="meta != null"
+    [meta]="meta"
+    [links]="links"
+    (nextPageEvent)="nextPage($event)">    
+</app-pagination>

@@ -1,0 +1,10 @@
+<app-category-list 
+    [categories]="categories"
+    (destroyCategoryEvent)="destroyCategory($event)">
+</app-category-list>
+
+<app-pagination *ngIf="meta != null"   
+    [meta]="meta"
+    [links]="links"
+    (nextPageEvent)="nextPage($event)">
+</app-pagination>

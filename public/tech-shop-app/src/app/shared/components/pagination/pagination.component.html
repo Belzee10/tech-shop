@@ -1,0 +1,40 @@
+<div *ngIf="cantPages > 1" class="d-flex align-items-top justify-content-between pagination-content">
+    <div></div>
+    <div class="pagination">
+        <nav aria-label="Page navigation">
+            <ul class="pagination ">
+                <li *ngIf="links" class="page-item"
+                    [ngClass]="{'disabled':!links.prev}">
+                    <a class="page-link" aria-label="Previous"
+                        (click)="goToPage(meta.current_page-1)">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li *ngFor="let page of totalPages; let i = index" class="page-item"
+                    [ngClass]="{'active':meta.current_page === i+1}">
+                    <a class="page-link"
+                        (click)="goToPage(page)">
+                        {{page}}
+                    </a>
+                </li>            
+                <li *ngIf="links" class="page-item"
+                    [ngClass]="{'disabled':!links.next}">
+                    <a class="page-link" aria-label="Next"
+                        (click)="goToPage(meta.current_page+1)">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>       
+    </div>
+    <div>
+        <span *ngIf="meta" class="d-none d-md-block">
+            Results: {{meta.from}} - {{meta.to}} / {{meta.total}}
+        </span>
+    </div>
+</div>
+
+
+

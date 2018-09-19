@@ -1,0 +1,78 @@
+<section id="product-details">
+  <div class="row">
+      <div class="col">
+          <h1>Product Details</h1>
+      </div>
+  </div>
+  <hr class="side-divider">
+  <div class="row">
+      <div class="col-md-10 offset-md-1">
+          <div *ngIf="product" class="card">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="product-img text-center">
+                              <img [src]="product.image | urlImage" class="img-fluid"
+                                   [title]="product.name | capitalize" 
+                                   [alt]="product.name | capitalize">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="product-title">
+                              <h5>{{product.name | capitalize}} <span *ngIf="isNew()" class="badge badge-success">New</span></h5>
+                              <span class="company">{{product.brand | capitalize}}</span>
+                              <span><strong>${{product.price}}</strong></span>
+                          </div>                          
+                          <div class="row">
+                              <div class="col">
+                                  <h6>Description</h6>
+                                  <p>
+                                    {{product.description}}
+                                  </p>
+                              </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-lg-7 offset-lg-5">
+                                <div *ngIf="product.cant >= 1; else noAdded" class="row no-gutters add-remove-to-cart ">
+                                    <div class="col-3">
+                                        <button [disabled]="loadingRemove" (click)="removeFromCart(product.id)" 
+                                                [ngStyle]="{'padding-left':loadingRemove ? '4px' : '12px'}"
+                                                class="btn btn-indigo remove">
+                                            <i *ngIf="!loadingRemove" class="mdi mdi-minus"></i>
+                                            <span *ngIf="loadingRemove" class="spinner"></span>
+                                        </button>
+                                    </div>
+                                    <div class="col text-center">
+                                        <span>{{product.cant}} in cart</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <button [disabled]="loadingAdd" (click)="addToCart(product.id)" 
+                                                [ngStyle]="{'padding-left':loadingAdd ? '4px' : '12px'}"
+                                                class="btn btn-indigo add float-right">
+                                            <i *ngIf="!loadingAdd" class="mdi mdi-plus"></i>
+                                            <span *ngIf="loadingAdd" class="spinner"></span>
+                                        </button>
+                                    </div>                
+                                </div>
+                                <ng-template #noAdded>
+                                    <div class="col">
+                                        <button [disabled]="loadingAdd"  (click)="addToCart(product.id)" 
+                                            class="btn btn-block btn-indigo add-to-cart">
+                                            <span *ngIf="loadingAdd" class="spinner"></span>
+                                            <span *ngIf="!loadingAdd">
+                                                <i class="mdi mdi-cart"></i>
+                                                Add to cart
+                                            </span>
+                                        </button>
+                                    </div>                                
+                                </ng-template> 
+                            </div>                                                          
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

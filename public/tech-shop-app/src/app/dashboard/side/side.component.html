@@ -1,0 +1,17 @@
+<h1>Category</h1>
+<hr class="side-divider">
+<div *ngIf="categories?.length > 0" class="custom-control custom-radio">
+  <input type="radio" id="0" name="customRadio" class="custom-control-input" (click)="selectCategory()" checked>
+  <label class="custom-control-label" for="0">
+    All
+  </label>
+</div>
+
+<div *ngFor="let category of categories; let i = index" class="custom-control custom-radio">
+  <input type="radio" [id]="i+1" name="customRadio" class="custom-control-input" (click)="selectCategory(category)">
+  <label class="custom-control-label" [for]="i+1">
+    {{category.name | capitalize}}  
+  </label>
+</div>
+
+

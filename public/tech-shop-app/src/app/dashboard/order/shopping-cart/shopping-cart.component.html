@@ -1,0 +1,80 @@
+<section id="shopping-cart">
+  <app-title [title]="title"></app-title>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Amount</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <th scope="row" class="text-center">
+              <img *ngIf="product.image" class="img-responsive"
+                [src]="product.image|urlImage"
+                [alt]="product.name"
+                [title]="product.name | capitalize">
+            </th>
+            <td>
+              <h5>{{product.name | capitalize}}</h5>
+              <span class="text-muted">{{product.brand | capitalize}}</span>
+            </td>
+            <td>
+              ${{product.price}}
+            </td>
+            <td>
+              {{product.pivot.cant}}
+              <div class="btn-group btn-group-toggle">                                             
+                  <label class="btn btn-indigo btn-quantity">
+                    <input (click)="removeFromCart(product)" type="radio" name="options" id="remove" autocomplete="off"> 
+                    <i class="mdi mdi-minus"></i>
+                  </label>
+                  <label class="btn btn-indigo btn-quantity">
+                      <input (click)="addToCart(product)" type="radio" name="options" id="add" autocomplete="off"> 
+                      <i class="mdi mdi-plus"></i>
+                  </label> 
+                </div>
+            </td>
+            <td>
+              <strong>
+                ${{product.price * product.pivot.cant}}
+              </strong>
+            </td>
+            <td>
+              <a (click)="deleteFromCart(product)" class="btn btn-close" title="Delete from Cart">
+                <i class="mdi mdi-close"></i>
+              </a>                        
+            </td>
+          </tr>
+          <tr *ngIf="products?.length == 0" class="table-secondary">
+            <th colspan="7" class="text-center">
+                Shopping Cart empty :(
+            </th>            
+          </tr>
+        </tbody>
+      </table>
+    </div>    
+  </div>
+  <div *ngIf="products?.length != 0" class="row">
+    <div class="col-sm-10 offset-sm-2 check-out">
+      <div class="float-right">
+          <span><strong>Total</strong></span>
+          <span class="total">
+            <strong>
+              ${{total}}
+            </strong>
+          </span>
+          <button routerLink="/check-out" class="btn btn-indigo">
+            Check Out
+            <i class="mdi mdi-chevron-right"></i>
+          </button>
+      </div>                    
+    </div>                  
+  </div>
+</section>  

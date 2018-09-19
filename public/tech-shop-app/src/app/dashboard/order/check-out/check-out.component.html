@@ -1,0 +1,71 @@
+<section id="check-out">
+  <app-title [title]="title"></app-title>
+  <div class="row">
+    <div class="col-md-6">
+        <form (ngSubmit)="completeOrder()" [formGroup]="orderForm" novalidate>            
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" 
+                       class="form-control" 
+                       id="address" 
+                       placeholder="Cristobal Colon Ave"
+                       formControlName="address"
+                       required [ngClass]="{
+                        'is-invalid': address.invalid && (address.dirty || address.touched)
+                      }">
+                      <div class="invalid-feedback"
+                          *ngIf="address.errors && (address.dirty || address.touched)">
+                        Required
+                      </div>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" 
+                       class="form-control" 
+                       id="city" 
+                       placeholder="Havana"
+                       formControlName="city"
+                       required [ngClass]="{
+                        'is-invalid': city.invalid && (city.dirty || city.touched)
+                      }">
+                      <div class="invalid-feedback"
+                          *ngIf="city.errors && (city.dirty || city.touched)">
+                          Required
+                      </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="orderForm.invalid" class="btn btn-indigo">Place Order</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+          <div class="card-body">
+              <h5>Order Summary</h5>
+              <p class="text-muted">You have <strong>{{totalProducts}}</strong> items in your shopping cart</p>
+              <hr>
+              <div *ngFor="let product of products">
+                <div class="row">
+                    <div class="col order-summary">
+                        <div class="float-left">
+                            <span *ngIf="product.pivot.cant > 1">
+                                {{product.pivot.cant}} x
+                            </span>                            
+                            {{product.name | capitalize}}
+                        </div>
+                        <span class="float-right">${{product.price * product.pivot.cant}}</span>
+                    </div>
+                </div>
+                <hr> 
+              </div>               
+              <div class="row">
+                  <div class="col order-summary">
+                      <span class="float-left"><strong>Total</strong></span>
+                      <span class="float-right"><strong>${{total}}</strong></span>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>  
+</section>  

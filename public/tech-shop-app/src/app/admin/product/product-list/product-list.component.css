@@ -1,0 +1,12 @@
+.input-group { 
+    margin-top: 15px;
+}
+.table .btn {
+    padding: 0 4px;
+}
+
+@media(min-width: 576px) {
+    .input-group { 
+        margin-top: 0;
+    }
+}

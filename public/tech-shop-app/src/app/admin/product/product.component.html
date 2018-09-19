@@ -1,0 +1,10 @@
+<app-product-list 
+    [products]="products"
+    (destroyProductEvent)="destroyProduct($event)">
+</app-product-list>
+
+<app-pagination
+    [meta]="meta"
+    [links]="links"
+    (nextPageEvent)="nextPage($event)">    
+</app-pagination>
