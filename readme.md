@@ -1,6 +1,6 @@
 ### TechShop
 A fake ecommerce app that allows you to buy tech items such as: *phones, tables, laptops, etc*.
-You can manage categories, products, orders and users. Also you can make orders and review your orders.
+You can manage categories, products, orders and users. Also you can add any procut to the Cart, make orders and review your orders.
 
 #### Screenshot:
 ![alt text](https://res.cloudinary.com/dombtm0fe/image/upload/v1537368098/screencapture-techshopapp-herokuapp-home-2018-09-19-10_19_59.png)
